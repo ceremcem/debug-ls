@@ -1,5 +1,4 @@
-#require! './my-lib': {sleep}
-sleep = (f, ms) -> set-timeout ms, f
+require! './my-lib': {sleep}
 
 console.log "hello!"
 i = 0
