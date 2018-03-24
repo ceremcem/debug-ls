@@ -1,2 +1,11 @@
 #!/bin/bash
-lsc --nodejs --inspect-brk $@
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+export NODE_MODULES="$(realpath "$DIR/node_modules"):./"
+
+lsFile="$1"
+jsFile="${lsFile%.ls}.js"
+browserify -t browserify-livescript --extension "ls" --debug --node $lsFile -o $jsFile
+if [ "$?" == "0" ]; then
+    nodejs --inspect-brk $jsFile
+fi
