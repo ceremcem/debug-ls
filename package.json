@@ -1,0 +1,23 @@
+{
+  "name": "debugging-livescript",
+  "version": "1.0.0",
+  "description": "Normally you would run `hello.ls` by:",
+  "main": "hello.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceremcem/debugging-livescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ceremcem/debugging-livescript/issues"
+  },
+  "homepage": "https://github.com/ceremcem/debugging-livescript#readme",
+  "dependencies": {
+    "browserify-livescript": "git+https://git@github.com/ceremcem/browserify-livescript.git",
+    "source-map-support": "^0.5.4"
+  }
+}
