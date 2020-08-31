@@ -1,12 +1,22 @@
 #!/bin/bash
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
-DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-export NODE_MODULES="$(realpath "$DIR/node_modules"):./"
+src=$1
+[[ -z $src ]] && { echo "First parameter should be the .ls file"; exit 1; }
 
-lsFile="$1"
-[ $lsFile ] || { echo "Filename is required."; exit 5; }
-jsFile="__tmp_${lsFile%.ls}.js"
-browserify -t browserify-livescript --extension "ls" --debug --node $lsFile -o $jsFile
-if [ "$?" == "0" ]; then
-    node -r source-map-support/register --inspect-brk $jsFile
-fi
+tmp="$(dirname $src)/__$(basename $src).js"
+[[ -f $tmp ]] && { echo "ERROR: TMP file exists: $tmp"; exit 2; }
+cleanup(){
+    echo "Cleaning up temporary file ($tmp)"
+    rm $tmp
+}
+trap cleanup EXIT
+rollup -c "$DIR/rollup.config.js" --input $src --output.file $tmp
+echo "Go to chrome://inspect/#devices"
+node --enable-source-maps --inspect-brk $tmp
