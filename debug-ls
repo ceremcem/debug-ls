@@ -14,7 +14,7 @@ tmp="$(dirname $src)/__$(basename $src).js"
 [[ -f $tmp ]] && { echo "ERROR: TMP file exists: $tmp"; exit 2; }
 cleanup(){
     echo "Cleaning up temporary file ($tmp)"
-    rm $tmp
+    rm $tmp 2> /dev/null
 }
 trap cleanup EXIT
 rollup -c "$DIR/rollup.config.js" --input $src --output.file $tmp
