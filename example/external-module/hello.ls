@@ -1,10 +1,12 @@
-require! './my-lib': {sleep}
+require! 'my-lib': {sleep}
+require! 'fs'
 
 console.log "hello!"
 i = 0
 <~ :lo(op) ~>
     console.log "looping... #{i++}"
-    <~ sleep 2000ms
+    console.log fs.readdirSync('.')
+    <~ sleep 1000ms
     return op! if i > 20
     debugger
     lo(op)
