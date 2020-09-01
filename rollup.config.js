@@ -3,11 +3,13 @@ import commonjs from '@rollup/plugin-commonjs';
 import builtins from 'rollup-plugin-node-builtins';
 import resolve from '@rollup/plugin-node-resolve';
 import includePaths from 'rollup-plugin-includepaths';
+const builtinModules = require('builtin-modules');
+
 
 let includePathOptions = {
     include: {},
     paths: process.env.NODE_PATH.split( /[:;]/ ),
-    external: [],
+    external: builtinModules,
     extensions: ['.js', '.json', '.ls']
 };
 

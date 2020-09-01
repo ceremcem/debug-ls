@@ -20,6 +20,7 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^13.0.0",
     "@rollup/plugin-node-resolve": "^8.0.1",
+    "builtin-modules": "^3.1.0",
     "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-livescript": "^0.1.1",
     "rollup-plugin-node-builtins": "^2.1.2"
