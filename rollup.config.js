@@ -4,6 +4,7 @@ import builtins from 'rollup-plugin-node-builtins';
 import resolve from '@rollup/plugin-node-resolve';
 import includePaths from 'rollup-plugin-includepaths';
 const builtinModules = require('builtin-modules');
+import json from '@rollup/plugin-json';
 
 
 let includePathOptions = {
@@ -21,6 +22,7 @@ export default {
   plugins: [
     livescript(),
     includePaths(includePathOptions),
+    json(),
     // commonjs before bultins      
     commonjs({ 
         extensions: ['.js', '.ls'],

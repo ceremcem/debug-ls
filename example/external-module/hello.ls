@@ -1,7 +1,8 @@
 require! 'my-lib': {sleep}
 require! 'fs'
+require! './my-data'
 
-console.log "hello!"
+console.log "hello!", my-data
 i = 0
 <~ :lo(op) ~>
     console.log "looping... #{i++}"
