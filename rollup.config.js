@@ -17,7 +17,8 @@ let includePathOptions = {
 export default {
   output: {
     sourcemap: "inline",
-    format: 'cjs'
+    format: 'cjs',
+    exports: "auto"
   },
   plugins: [
     livescript(),
