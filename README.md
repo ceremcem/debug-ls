@@ -14,6 +14,17 @@ When you want to debug, run the same file
 * Find your process that is listed under "Remote Target" section 
 * Click "inspect" button
 
+# Install
+
+```
+# Assuming you are in /path/to/somewhere
+git clone https://github.com/ceremcem/debug-ls
+cd debug-ls && npm install
+npm i -g rollup # if you haven't already 
+```
+
+Add `/path/to/somewhere/debug-ls/debug-ls` in your `$PATH`. 
+
 # Example 
 
 See the [./example](./example) folder. 
