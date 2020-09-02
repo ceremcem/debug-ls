@@ -16,4 +16,9 @@ When you want to debug, run the same file
 
 # Example 
 
-See ./example
+See the [./example](./example) folder. 
+
+# Screenshot
+
+![image](https://user-images.githubusercontent.com/6639874/92029989-0f2d4800-ed6f-11ea-9d16-503114ef400f.png)
+
