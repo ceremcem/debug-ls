@@ -16,7 +16,7 @@ let includePathOptions = {
 
 export default {
   output: {
-    sourcemap: "inline",
+    //sourcemap: "inline", <- decided via command line arguments
     format: 'cjs',
     exports: "auto"
   },

@@ -8,15 +8,16 @@ done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 src=$1
-[[ -z $src ]] && { echo "First parameter should be the .ls file"; exit 1; }
+tmp="${src}.js"
 
-tmp="$(dirname $src)/__$(basename $src).js"
-[[ -f $tmp ]] && { echo "ERROR: TMP file exists: $tmp"; exit 2; }
+set -e
+$DIR/bundle-ls "$src" --out "$tmp"
+
 cleanup(){
     echo "Cleaning up temporary file ($tmp)"
     rm $tmp 2> /dev/null
 }
 trap cleanup EXIT
-rollup -c "$DIR/rollup.config.js" --input $src --output.file $tmp
+
 echo "Go to chrome://inspect/#devices"
 node --enable-source-maps --inspect-brk $tmp
