@@ -20,4 +20,5 @@ cleanup(){
 trap cleanup EXIT
 
 echo "Go to chrome://inspect/#devices"
-node --enable-source-maps --inspect-brk $tmp
+[[ -n $BREAK_ON_START ]] && _BRK="-brk"
+node --enable-source-maps --inspect${_BRK} $tmp
