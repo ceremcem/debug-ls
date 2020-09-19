@@ -4,15 +4,35 @@ Normally you would run `hello.ls` by:
 
     lsc hello.ls 
 
-When you want to debug, run the same file 
+When you want to debug, run the same file with:
 
     ./debug-ls hello.ls
 
-...and 
+...and:
+
+OPTION 1: 
+
+(Preferred way)
+
+* Install Chrome Extension: NIM (Node Inspector Manager)
+
+In this case there is nothing to be done manually. 
+
+NIM extension simply watches `node` and whenever `node` is (re)started with `--inspect` parameter, NIM opens a debugger in a new window. 
+
+OPTION 2:
+
+(Manual way, no need an external application)
 
 * Go to `chrome://inspect/#devices` address in Chrome
 * Find your process that is listed under "Remote Target" section 
 * Click "inspect" button
+
+If you prefer this way, you need to repeat these steps whenever your source file changed.
+
+# Behavior 
+
+The source file is re-bundled when it is or its dependencies are changed. 
 
 # Install
 

@@ -20,6 +20,7 @@ show_help(){
         --no-map    : Do not include Source Maps
         -f, --force : Overwrite the output file
         -h, --help  : Show help
+        -w, --watch : Watch the file and its dependencies, rebuild when necessary
 
 HELP
 }
@@ -46,6 +47,7 @@ err(){
 out="auto"
 force=
 sourcemaps="--output.sourcemap=inline"
+watch=
 # ---------------------------
 args_backup=("$@")
 args=()
@@ -69,6 +71,9 @@ while :; do
             ;;
         --no-map) shift
             sourcemaps=
+            ;;
+        -w|--watch) shift
+            watch="-w"
             ;;
         # --------------------------------------------------------
         -*) # Handle unrecognized options
@@ -101,4 +106,8 @@ cleanup(){
     rm $out 2> /dev/null
 }
 trap cleanup INT
-rollup -c "$DIR/rollup.config.js" --input "$src" --output.file "$out" $sourcemaps
+rollup $watch -c "$DIR/rollup.config.js" --input "$src" --output.file "$out" $sourcemaps &
+while sleep 1; do
+    # wait until first output is created
+    [[ -f "$out" ]] && break
+done

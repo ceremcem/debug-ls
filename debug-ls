@@ -11,14 +11,17 @@ src=$1
 tmp="${src}.js"
 
 set -e
-$DIR/bundle-ls "$src" --out "$tmp"
+$DIR/bundle-ls --watch "$src" --out "$tmp"
+bundle_pid=$!
 
 cleanup(){
     echo "Cleaning up temporary file ($tmp)"
     rm $tmp 2> /dev/null
+    kill $bundle_pid 2>/dev/null || true
 }
 trap cleanup EXIT
 
 echo "Go to chrome://inspect/#devices"
 [[ -n $BREAK_ON_START ]] && _BRK="-brk"
-node --enable-source-maps --inspect${_BRK} $tmp
+$DIR/watch-run $tmp node --enable-source-maps --inspect${_BRK} $tmp 
+wait # for build.sh's --watch mode. 
