@@ -10,29 +10,23 @@ When you want to debug, run the same file with:
 
 ...and:
 
-OPTION 1: 
+### OPTION 1: (Preferred way)
 
-(Preferred way)
+If you install NiM (Node Inspection Manager) extension, there is nothing to be done manually. A debugger window will be automatically (re)launched when `./debug-ls your-file.ls` is invoked (or `your-file.ls` is modified). 
 
-* Install Chrome Extension: NIM (Node Inspector Manager)
+This approach is way more convenient when you edit your source code, as explained [here](https://github.com/gkz/LiveScript/issues/972#issuecomment-695342539).
 
-In this case there is nothing to be done manually. 
-
-NIM extension simply watches `node` and whenever `node` is (re)started with `--inspect` parameter, NIM opens a debugger in a new window. 
-
-OPTION 2:
-
-(Manual way, no need an external application)
+### OPTION 2: (Manual way, no external application needed)
 
 * Go to `chrome://inspect/#devices` address in Chrome
 * Find your process that is listed under "Remote Target" section 
 * Click "inspect" button
 
-If you prefer this way, you need to repeat these steps whenever your source file changed.
+If you prefer this way, you need to close the current debugger window and repeat these steps everytime your source file is modified.
 
-# Behavior 
+# Watch for changes 
 
-The source file is re-bundled when it is or its dependencies are changed. 
+The source file is watched and re-bundled when it is or any of its dependencies are modified. 
 
 # Install
 
