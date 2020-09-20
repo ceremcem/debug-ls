@@ -1,4 +1,4 @@
-# How To Debug Server Side Livescript Process
+# How To Debug a Server Side Livescript Process
 
 Normally you would run `hello.ls` by: 
 
@@ -14,7 +14,7 @@ When you want to debug, run the same file with:
 
 If you install NiM (Node Inspection Manager) extension, there is nothing to be done manually. A debugger window will be automatically (re)launched when `./debug-ls your-file.ls` is invoked (or `your-file.ls` is modified). 
 
-This approach is way more convenient when you edit your source code, as explained [here](https://github.com/gkz/LiveScript/issues/972#issuecomment-695342539).
+This approach is way more convenient during development, as explained [here](https://github.com/gkz/LiveScript/issues/972#issuecomment-695342539).
 
 ### OPTION 2: (Manual way, no external application needed)
 
