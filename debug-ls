@@ -23,5 +23,5 @@ trap cleanup EXIT
 
 echo "Go to chrome://inspect/#devices"
 [[ -n $BREAK_ON_START ]] && _BRK="-brk"
-$DIR/watch-run $tmp node --enable-source-maps --inspect${_BRK} $tmp 
+$DIR/watch-run $tmp --notify node --enable-source-maps --inspect${_BRK} $tmp 
 wait # for build.sh's --watch mode. 

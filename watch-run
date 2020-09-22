@@ -1,10 +1,32 @@
 #!/bin/bash
 set -u
 
+usage(){
+    cat <<EOF
+
+    $(basename $0) /path/to/file-to-be-watched [--notify] command [...args]
+
+EOF
+}
+
 ### Set initial time of file
 file=${1:-}
-[[ -n $file ]] || { echo "Filename to be watched must be supplied"; exit 2; }
+[[ -n $file ]] || { echo "Filename to be watched must be supplied"; usage; exit 2; }
 shift
+
+notification_enabled=
+if [[ "${1:-}" = "--notify" ]]; then
+    notification_enabled=true
+    shift
+fi
+first_notification=true
+notify(){
+    local pfx=
+    [[ "$first_notification" = true ]] || pfx="re"
+    notify-send "debug-ls" "$(basename $file) ${pfx}started."
+    first_notification=false
+}
+
 cmd=${@:-}
 [[ -n $cmd ]] || { echo "Command must be supplied"; exit 2; }
 LTIME=
@@ -25,6 +47,7 @@ while :; do
             echo "---------------------------------------"
             kill $CMD_PID
         fi
+        [[ "$notification_enabled" = "true" ]] && notify
         $cmd &
         CMD_PID=$!
         LTIME=$ATIME
