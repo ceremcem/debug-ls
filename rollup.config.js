@@ -6,10 +6,11 @@ import includePaths from 'rollup-plugin-includepaths';
 const builtinModules = require('builtin-modules');
 import json from '@rollup/plugin-json';
 
+var paths = process.env.NODE_PATH.split( /[:;]/ ).filter(x => x.length > 0)
 
 let includePathOptions = {
     include: {},
-    paths: process.env.NODE_PATH.split( /[:;]/ ),
+    paths: paths,
     external: builtinModules,
     extensions: ['.js', '.json', '.ls']
 };
@@ -21,16 +22,26 @@ export default {
     exports: "auto"
   },
   plugins: [
-    livescript(),
     includePaths(includePathOptions),
+    livescript(),
     json(),
-    // commonjs before bultins      
-    commonjs({ 
+    // commonjs before bultins
+    commonjs({
         extensions: ['.js', '.ls'],
         }), // import commonjs from 'rollup-plugin-commonjs';
     builtins(), //  import builtins from 'rollup-plugin-node-builtins';
-    resolve({ 
+    resolve({
         extensions: ['.js', '.ls']
         }),
+    {
+      transform ( code, id ) {
+        // Debug the Rollup Config:
+        // ------------------------
+        //console.log("paths: ", paths);
+        //console.log(builtinModules);
+        // ------------------------
+        // not returning anything, so doesn't affect bundle
+      }
+    }
     ]
 };

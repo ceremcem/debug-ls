@@ -11,7 +11,7 @@ src=$1
 tmp="${src}.js"
 
 set -e
-$DIR/bundle-ls --watch "$src" --out "$tmp"
+$DIR/bundle-ls --watch "$src" --out "$tmp" --force
 bundle_pid=$!
 
 cleanup(){
